@@ -1,0 +1,611 @@
+/* ================================= */
+/* ========= GLOBAL STYLE ========== */
+/* ================================= */
+
+.movie-details {
+  background-color: #0f0f0f;
+  color: #ffffff;
+  padding: 40px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.section {
+  margin-top: 50px;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+  border-left: 4px solid #f5c518;
+  padding-left: 12px;
+  font-size: 22px;
+}
+
+/* ================================= */
+/* ========= TOP SECTION =========== */
+/* ================================= */
+
+.top-section {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.poster-section {
+  position: relative;
+}
+
+.poster-section img {
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+}
+
+.rating {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: #f5c518;
+  color: black;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* ================================= */
+/* ========= INFO SECTION ========== */
+/* ================================= */
+
+.info-section h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #cccccc;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #1f1f1f;
+  border: 1px solid #f5c518;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.theater-tag {
+  margin-top: 10px;
+  color: #f5c518;
+  font-weight: bold;
+}
+
+/* ================================= */
+/* ========= TRAILER =============== */
+/* ================================= */
+
+.trailer-section iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 12px;
+  margin-top: 30px;
+  border: none;
+}
+
+/* ================================= */
+/* ========= DESCRIPTION =========== */
+/* ================================= */
+
+.section p {
+  color: #cccccc;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ================================= */
+/* ========= COMMON ROW LAYOUT ===== */
+/* ================================= */
+
+.people-row {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 50px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scroll-behavior: smooth;
+}
+
+.people-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.people-row::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+
+.people-row > div {
+  flex: 0 0 auto;
+}
+
+/* ================================= */
+/* ========= CAST (CIRCLE) ========= */
+/* ================================= */
+
+.cast-card {
+  text-align: center;
+  min-width: 170px;
+}
+
+.cast-card img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  transition: 0.3s ease;
+}
+
+.cast-card img:hover {
+  transform: scale(1.05);
+}
+
+.cast-card h4 {
+  margin-top: 12px;
+  font-size: 15px;
+}
+
+/* ================================= */
+/* ========= CREW (TILTED BOX) ===== */
+/* ================================= */
+
+.crew-card {
+  text-align: start;
+  min-width: 170px;
+}
+
+.crew-card img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 18px;
+  transform: rotate(-6deg);
+  transition: 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.crew-card img:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.crew-card h4 {
+  margin-top: 14px;
+  font-size: 15px;
+}
+
+.crew-card p {
+  font-size: 13px;
+  color: #aaa;
+}
+
+
+/* ================= PHOTOS ================= */
+
+.photos-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.photos-row img {
+  flex: 0 0 250px;        /* FORCE SAME WIDTH */
+  width: 250px;           /* FIXED WIDTH */
+  height: 160px;          /* FIXED HEIGHT */
+  object-fit: cover;      /* CROP PROPERLY */
+  border-radius: 14px;
+  display: block;         /* remove inline spacing issue */
+  transition: transform 0.3s ease;
+}
+
+.photos-row img:hover {
+  transform: scale(1.05);
+}
+/* ================================= */
+/* ========= STREAMING ============= */
+/* ================================= */
+
+.streaming-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.platform {
+  background-color: #1a1a1a;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  width: 150px;
+  transition: 0.3s;
+}
+
+.platform:hover {
+  background-color: #222;
+  transform: translateY(-5px);
+}
+
+.platform img {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.platform span {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #f5c518;
+}
+
+/* ================================= */
+/* ========= REVIEWS =============== */
+/* ================================= */
+
+.reviews-summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.big-rating {
+  font-size: 42px;
+  font-weight: bold;
+  color: #f5c518;
+}
+
+.rating-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar-row span {
+  width: 60px;
+  font-size: 14px;
+}
+
+.bar-track {
+  flex: 1;
+  height: 10px;
+  background: #333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #f5c518;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+/* ================================= */
+/* ========= RESPONSIVE ============ */
+/* ================================= */
+
+@media (max-width: 768px) {
+
+  .top-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .poster-section img {
+    width: 220px;
+  }
+
+  .trailer-section iframe {
+    height: 250px;
+  }
+
+  .cast-card img,
+  .crew-card img {
+    width: 140px;
+    height: 140px;
+  }
+}
+.reviews-vertical-bars {
+  width: 80%;
+  margin: 20px auto;   /* center it */
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between; /* distribute bars evenly */
+  height: 200px;
+}
+
+.bar-wrapper {
+  flex: 1;              /* each bar takes equal width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar {
+  width: 60%;           /* bar fills 60% of its column */
+  background-color: #f5c518;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.4s ease;
+}
+  
+
+.star-number {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #ccc;
+}
+.videos-container {
+  display: flex;
+  gap: 20px;              /* 👈 space between videos */
+  flex-wrap: wrap;        /* makes it responsive */
+  margin-top: 15px;
+}
+
+.videos-container iframe {
+  flex: 1;
+  min-width: 300px;       /* prevents too small videos */
+  height: 250px;
+  border-radius: 8px;
+}
+/* Like / Dislike Section */
+.like-dislike-section {
+  margin: 40px 0;
+  color: #fff;
+}
+
+.buttons-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.buttons-row button {
+  background: #00e5ff;
+  border: none;
+  color: black;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttons-row button:hover {
+  background: #007c91;
+  color: #fff;
+}
+
+/* Comments Section */
+.comments-section {
+  margin: 40px 0;
+  color: #fff;
+}
+
+.add-comment {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-comment input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.add-comment button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #00e5ff;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-comment button:hover {
+  background: #007c91;
+  color: #fff;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-card {
+  background: #222;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.comment-user {
+  font-weight: 700;
+  margin-right: 6px;
+  color: #00e5ff;
+}
+
+.comment-text {
+  color: #ccc;
+}
+.comment-section-compact {
+  margin-top: 20px;
+  padding: 10px;
+  background: #111;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.like-dislike-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.like-dislike-row button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.like-dislike-row button:hover {
+  background: #00e5ff;
+  color: black;
+}
+
+.comment-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.comment-input-row input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #222;
+  color: #fff;
+}
+
+.comment-input-row button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #00e5ff;
+  color: black;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.comment-count {
+  font-size: 13px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.all-comments-list {
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid #333;
+  padding-top: 8px;
+}
+
+.single-comment {
+  font-size: 13px;
+  margin: 4px 0;
+  color: #fff;
+}
+.write-review-btn{
+margin-top:10px;
+padding:10px 18px;
+border:none;
+background:#ff3d00;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.write-review-btn:hover{
+background:#ff5722;
+}
+
+.rating-link{
+cursor:pointer;
+}
+
+.rating-link:hover{
+text-decoration:underline;
+}
+.review-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.add-review-btn{
+background:#e50914;
+border:none;
+color:white;
+padding:6px 14px;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.review-box{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.review-box textarea{
+width:100%;
+height:80px;
+padding:10px;
+border-radius:6px;
+border:none;
+}
+
+.submit-review{
+background:#e50914;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.comment-card{
+background:#1c1c1c;
+padding:10px;
+border-radius:6px;
+margin-top:10px;
+}
+.view-reviews-btn{
+  margin-top:10px;
+  padding:8px 14px;
+  background:#222;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}

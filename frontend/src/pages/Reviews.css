@@ -1,0 +1,111 @@
+/* Page Container */
+.reviews-page{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+  color:white;
+}
+
+/* Title */
+.reviews-page h1{
+  margin-bottom:30px;
+}
+
+/* Add Review Box */
+.add-review{
+  background:#141414;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:40px;
+  border:1px solid #2a2a2a;
+}
+
+/* Input Fields */
+.add-review textarea{
+  width:100%;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#0d0d0d;
+  color:white;
+  margin-bottom:10px;
+}
+
+.add-review input{
+  width:80px;
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#0d0d0d;
+  color:white;
+  margin-right:10px;
+}
+
+/* Submit Button */
+.add-review button{
+  padding:8px 16px;
+  background:#00bcd4;
+  border:none;
+  border-radius:6px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.add-review button:hover{
+  background:#0097a7;
+}
+
+/* Reviews Section */
+.reviews-list{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* Review Card */
+.review-card{
+  background:#141414;
+  padding:20px;
+  border-radius:10px;
+  border:1px solid #2a2a2a;
+}
+
+/* User Name */
+.review-card strong{
+  font-size:16px;
+  color:#00e5ff;
+}
+
+/* Rating */
+.review-card .rating{
+  color:#ffd700;
+  margin:5px 0;
+}
+
+/* Review Text */
+.review-card .review-text{
+  margin:10px 0;
+  color:#ddd;
+  line-height:1.5;
+}
+
+/* Buttons */
+.review-actions{
+  display:flex;
+  gap:10px;
+}
+
+.review-actions button{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#222;
+  color:white;
+  cursor:pointer;
+}
+
+.review-actions button:hover{
+  background:#333;
+}

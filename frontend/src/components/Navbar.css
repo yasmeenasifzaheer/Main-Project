@@ -1,0 +1,145 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: linear-gradient(to right, #0f0f1a, #111122);
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* LEFT */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo {
+  color: #00e5ff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  /* text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff; */
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+  position: relative;
+}
+
+.navbar a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #00e5ff;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+.navbar a:hover {
+  color: #00e5ff;
+  text-shadow: 0 0 8px #00e5ff;
+}
+
+/* CENTER SEARCH */
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #1c1c2b;
+  padding: 8px 15px;
+  border-radius: 30px;
+  gap: 10px;
+  border: 1px solid #f9f9fb;
+  transition: 0.3s;
+}
+
+.search-box:hover {
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px #00e5ff33;
+}
+
+.search-box select {
+  background: transparent;
+  border: none;
+  color: #00e5ff;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 180px;
+  font-size: 14px;
+}
+
+.search-icon {
+  cursor: pointer;
+  color: #00e5ff;
+  transition: 0.3s;
+}
+
+.search-icon:hover {
+  transform: scale(1.2);
+  text-shadow: 0 0 8px #00e5ff;
+}
+
+/* RIGHT */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+  color: white;
+  }
+
+.icon:hover {
+  color: #00e5ff;
+  transform: scale(1.2);
+  text-shadow: 0 0 8px #00e5ff;
+}
+
+.signin-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #555;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+  text-shadow: 0 0 4px #00e5ff;
+}
+
+.signin-btn:hover {
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+  text-shadow: 0 0 12px #00e5ff, 0 0 20px #00e5ff;
+  transform: translateY(-2px);
+}
