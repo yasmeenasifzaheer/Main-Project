@@ -13,16 +13,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Home route
+app.get("/", (req, res) => {
+  res.send("Movie Review API is running");
+});
+
 // Routes
 app.use("/api/movies", movieRoutes);
 
-// Error handling
+// 404 handler (must be LAST)
 app.use((req, res, next) => {
   res.status(404).json({ message: "Not Found" });
-});
-
-app.get("/", (req, res) => {
-  res.send("Movie Review API is running");
 });
 
 // Start server
