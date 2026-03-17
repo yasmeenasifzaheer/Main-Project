@@ -25,7 +25,7 @@ const [rating, setRating] = useState(0);
   const fetchMovie = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/movies/${id}`
+        `https://main-project-1-20ny.onrender.com/api/movies/${id}`
       );
 
       console.log("Comments from API:", res.data.userReviews?.comments);
@@ -86,7 +86,7 @@ const [rating, setRating] = useState(0);
 
   try {
     const res = await axios.post(
-      `http://localhost:5000/api/movies/${id}/comment`,
+      `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
       {
         user: "Anonymous",
         text: newComment,

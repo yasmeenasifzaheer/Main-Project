@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/movies");
+        const { data } = await axios.get("https://main-project-1-20ny.onrender.com/api/movies");
         const allMovies = data || [];
 
         // Trailer movies (not in theater)
