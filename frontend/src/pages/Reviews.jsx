@@ -14,8 +14,8 @@ export default function ReviewsPage() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/movies/${id}`);
-        setComments(res.data.userReviews?.comments || []);
+        const res = await axios.get(`https://main-project-1-20ny.onrender.com/api${id}`);
+       setComments(res.data.comments || []);
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
@@ -24,30 +24,24 @@ export default function ReviewsPage() {
     fetchReviews();
   }, [id]);
 
-  // Submit review
-const submitReview = async () => {
+ const submitReview = async () => {
   try {
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = user?.token;
+    const user = JSON.parse(localStorage.getItem("currentUser"));
 
-    await axios.post(
-      `http://localhost:5000/api/movies/${id}/comment`,
-      {
-        text : newComment,
-        rating
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
+   await axios.post(
+  `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
+  {
+    text: newComment,
+    rating,
+    userName: user?.name || "Anonymous"
+  }
+);
 
     setNewComment("");
     setRating(0);
 
-    const res = await axios.get(`http://localhost:5000/api/movies/${id}`);
+    const res = await axios.get(`https://main-project-1-20ny.onrender.com/api${id}`);
     setComments(res.data.userReviews?.comments || []);
 
   } catch (error) {

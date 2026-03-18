@@ -43,7 +43,7 @@ router.get("/:id/reviews", async (req, res) => {
   }
 });
 // POST a new review for a movie
-router.post("/:id/comment", protect, async (req, res) => {
+router.post("/:id/comment", async (req, res) => {
   const { text, rating } = req.body;
   const movieId = req.params.id;
 
@@ -51,13 +51,14 @@ router.post("/:id/comment", protect, async (req, res) => {
     const movie = await Movie.findById(movieId);
     if (!movie) return res.status(404).json({ message: "Movie not found" });
 
-    const review = new Review({
-      movie: movie._id,
-      user: req.user._id,       // from protect middleware
-      userName: req.user.name,  // from protect middleware
-      text,
-      rating
-    });
+   const { text, rating, userName } = req.body;
+
+const review = new Review({
+  movie: movie._id,
+  userName: userName || "Anonymous",
+  text,
+  rating
+});
 
     await review.save();
 
