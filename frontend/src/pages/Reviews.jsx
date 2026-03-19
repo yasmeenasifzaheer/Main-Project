@@ -14,7 +14,7 @@ export default function ReviewsPage() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`https://main-project-1-20ny.onrender.com/api${id}`);
+        const res = await axios.get(`https://main-project-1-20ny.onrender.com/api/movies/${id}`);
        setComments(res.data.comments || []);
       } catch (error) {
         console.error("Error fetching reviews:", error);
