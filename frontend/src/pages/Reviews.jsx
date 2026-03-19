@@ -25,9 +25,15 @@ export default function ReviewsPage() {
 
   // ✅ Run on page load
   useEffect(() => {
+  if (id) {
     fetchComments();
-  }, [id]);
 
+    // 🔥 retry after 1 second (handles Render delay)
+    setTimeout(() => {
+      fetchComments();
+    }, 1000);
+  }
+}, [id]);
   // ✅ Submit review
  const submitReview = async () => {
   try {
