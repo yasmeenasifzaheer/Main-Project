@@ -32,20 +32,9 @@ router.delete("/:id", deleteMovie);
 
 // GET all reviews for a movie
 // GET all reviews for a movie
+// GET all reviews for a movie
+// GET all reviews for a movie
 router.get("/:id/reviews", async (req, res) => {
-  try {
-    const reviews = await Review.find({ movie: req.params.id })
-      .sort({ createdAt: -1 });
-
-    res.json({ comments: reviews });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-// POST a new review for a movie
-router.post("/:id/comment", async (req, res) => {
-  const { text, user } = req.body;
-
   try {
     const movie = await Movie.findById(req.params.id);
 
@@ -53,21 +42,78 @@ router.post("/:id/comment", async (req, res) => {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    // 🔥 Ensure comments exists
-    if (!movie.comments) {
-      movie.comments = [];
+    // 🔹 1️⃣ Old comments from movie.userReviews.comments
+    let oldComments = [];
+    if (movie?.userReviews?.comments?.length) {
+      oldComments = movie.userReviews.comments.map((c) => ({
+        userName: c.user || "Anonymous",
+        text: c.text || "",
+        likes: c.likes || 0,
+        dislikes: c.dislikes || 0,
+        createdAt: c.createdAt ? new Date(c.createdAt) : new Date()
+      }));
     }
 
-    movie.comments.push({
-      user: user || "Anonymous",
-      text
+    // 🔹 2️⃣ Optional fallback: if someone used movie.comments field
+    if (!oldComments.length && movie?.comments?.length) {
+      oldComments = movie.comments.map((c) => ({
+        userName: c.user || "Anonymous",
+        text: c.text || "",
+        likes: c.likes || 0,
+        dislikes: c.dislikes || 0,
+        createdAt: c.createdAt ? new Date(c.createdAt) : new Date()
+      }));
+    }
+
+    // 🔹 3️⃣ New comments from Review collection
+    const dbReviews = await Review.find({ movie: req.params.id });
+    const formattedDbReviews = dbReviews.map((r) => ({
+      userName: r.userName || "Anonymous",
+      text: r.text || "",
+      likes: r.likes || 0,
+      dislikes: r.dislikes || 0,
+      createdAt: r.createdAt
+    }));
+
+    // 🔹 4️⃣ Merge old + new comments
+    const allComments = [...formattedDbReviews, ...oldComments];
+
+    // 🔹 5️⃣ Sort latest first
+    allComments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    // 🔹 6️⃣ Return merged comments
+    res.json({ comments: allComments });
+
+  } catch (err) {
+    console.error("GET REVIEWS ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+// POST a new review for a movie
+// POST a new review for a movie
+router.post("/:id/comment", async (req, res) => {
+  const { text, rating } = req.body;
+
+  try {
+    const movie = await Movie.findById(req.params.id);
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    // 🔥 Save ONLY in Review collection
+    const newReview = new Review({
+      movie: movie._id,
+      text,
+      rating: rating || 0,
+      userName: "Anonymous" // or later from auth
     });
 
-    await movie.save();
+    await newReview.save();
 
-    res.status(201).json(movie.comments);
+    res.status(201).json(newReview);
+
   } catch (err) {
-    console.error("🔥 BACKEND ERROR:", err); // VERY IMPORTANT
+    console.error("POST COMMENT ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });

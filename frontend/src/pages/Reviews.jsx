@@ -27,31 +27,31 @@ export default function ReviewsPage() {
   useEffect(() => {
   if (id) {
     fetchComments();
-
-    // 🔥 retry after 1 second (handles Render delay)
-    setTimeout(() => {
-      fetchComments();
-    }, 1000);
+     
   }
 }, [id]);
   // ✅ Submit review
  const submitReview = async () => {
   try {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
+    const token = localStorage.getItem("token");
 
     await axios.post(
       `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
       {
         text: newComment,
-        user: user?.name || "Anonymous"
+        rating: rating
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
     );
 
     setNewComment("");
     setRating(0);
 
-    // 🔥 IMPORTANT FIX
-    await fetchComments();
+    await fetchComments(); // 🔥 THIS refreshes UI immediately
 
   } catch (error) {
     console.error("Submit Review Error:", error);
@@ -96,12 +96,17 @@ export default function ReviewsPage() {
         {comments.length === 0 ? (
           <p>No reviews yet</p>
         ) : (
-          comments.map((c, i) => (
+         comments.map((c, i) => (
   <div key={i} className="review-card">
 
-    <strong>{c.user || "Anonymous"}</strong>  {/* ✅ FIX */}
+    {/* ✅ FIXED */}
+    <strong>{c.userName || c.user || "Anonymous"}</strong>
 
-    <p className="review-text">{c.text}</p>  {/* ✅ FIX */}
+    {/* ✅ ADD RATING */}
+    <div>⭐ {c.rating}</div>
+
+    {/* ✅ SAFE TEXT */}
+    <p>{c.text}</p>
 
     <div className="review-actions">
       <button onClick={() => likeReview(i)}>
