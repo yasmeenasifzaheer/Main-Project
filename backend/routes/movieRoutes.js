@@ -39,7 +39,7 @@ router.get("/:id/reviews", async (req, res) => {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    res.json({ comments: movie.comments });
+    res.json({ comments: movie.comments || [] });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

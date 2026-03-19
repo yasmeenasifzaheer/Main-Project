@@ -4,51 +4,55 @@ import axios from "axios";
 import "./Reviews.css";
 
 export default function ReviewsPage() {
-
   const { id } = useParams();
+
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [rating, setRating] = useState(0);
 
-  // Fetch reviews
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const res = await axios.get(`https://main-project-1-20ny.onrender.com/api/movies/${id}`);
-       setComments(res.data.comments || []);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      }
-    };
+  // ✅ Fetch comments (CORRECT API)
+  const fetchComments = async () => {
+    try {
+      const res = await axios.get(
+        `https://main-project-1-20ny.onrender.com/api/movies/${id}/reviews`
+      );
+      setComments(res.data.comments || []);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
 
-    fetchReviews();
+  // ✅ Run on page load
+  useEffect(() => {
+    fetchComments();
   }, [id]);
 
- const submitReview = async () => {
-  try {
+  // ✅ Submit review
+  const submitReview = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
 
-    const user = JSON.parse(localStorage.getItem("currentUser"));
+      await axios.post(
+        `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
+        {
+          text: newComment,
+          user: user?.name || "Anonymous" // ✅ match backend
+        }
+      );
 
-   await axios.post(
-  `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
-  {
-    text: newComment,
-    rating,
-    userName: user?.name || "Anonymous"
-  }
-);
+      // ✅ Clear input
+      setNewComment("");
+      setRating(0);
 
-    setNewComment("");
-    setRating(0);
+      // ✅ Refresh comments (FIXED)
+      fetchComments();
 
-    const res = await axios.get(`https://main-project-1-20ny.onrender.com/api${id}`);
-    setComments(res.data.userReviews?.comments || []);
+    } catch (error) {
+      console.error("Submit Review Error:", error);
+    }
+  };
 
-  } catch (error) {
-    console.error("Submit Review Error:", error);
-  }
-};
-  // Like review
+  // Like review (frontend only for now)
   const likeReview = (index) => {
     const updated = [...comments];
     updated[index].likes = (updated[index].likes || 0) + 1;
@@ -64,21 +68,11 @@ export default function ReviewsPage() {
 
   return (
     <div className="reviews-page">
-
       <h1>User Reviews</h1>
 
-      {/* Add Review Section */}
+      {/* Add Review */}
       <div className="add-review">
         <h2>Add Review</h2>
-
-        <input
-          type="number"
-          placeholder="Rating (1-5)"
-          min="1"
-          max="5"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-        />
 
         <textarea
           placeholder="Write your review..."
@@ -98,13 +92,13 @@ export default function ReviewsPage() {
         ) : (
           comments.map((c, i) => (
             <div key={i} className="review-card">
+              
+              {/* ✅ FIXED field name */}
+              <strong>{c.user || "Anonymous"}</strong>
 
-              {/* Display proper user name from backend */}
-              <strong>{c.userName || "Anonymous"}</strong>
-
-              <div className="rating">⭐ {c.rating}</div>
-
-              <p className="review-text">{c.text || c.comment}</p>
+              {/* ❌ rating removed (not in backend) */}
+              
+              <p className="review-text">{c.text}</p>
 
               <div className="review-actions">
                 <button onClick={() => likeReview(i)}>
@@ -120,7 +114,6 @@ export default function ReviewsPage() {
           ))
         )}
       </div>
-
     </div>
   );
 }
