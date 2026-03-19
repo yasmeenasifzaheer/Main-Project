@@ -364,7 +364,7 @@ body{
   transition: 0.3s;
 }
 
-.poster-wrapper:hover img {
+.poster-wrapper:hover {
   transform: scale(1.05);
 }
 
@@ -664,24 +664,25 @@ body{
   color: #00e5ff;
   font-weight: 600;
 }
-.poster-wrapper{
+.poster-wrapper {
   position: relative;
+  border-radius: 12px;
+  overflow: visible;   /* ✅ allow icons to stay visible */
 }
 
 /* container for icons */
-.movie-actions{
+.movie-actions {
   position: absolute;
   top: 10px;
   right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  z-index: 10;              /* ✅ bring above image */
+  pointer-events: auto;
 }
 /* icons style */
 .favorite-icon,
 .watchlist-icon{
   font-size: 26px;   /* bigger size */
-  cursor: pointer;
+  cursor: pointer; 
   transition: transform 0.2s ease;
 }
 

@@ -34,7 +34,7 @@ export default function ReviewsPage() {
  const submitReview = async () => {
   try {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+    console.log("USER:", currentUser);
     await axios.post(
       `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
       {
