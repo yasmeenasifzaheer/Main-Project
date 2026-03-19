@@ -107,16 +107,15 @@ router.post("/:id/comment", async (req, res) => {
 
     const newReview = await Review.create({
       movie: movie._id,
-      userName: "Anonymous",
+      userName: userName || "Anonymous",
       text,
-      rating: rating || 0 ,  // 🔥 safe fallback
-      userName: userName || "Anonymous"
+      rating: rating || 0
     });
 
     res.status(201).json(newReview);
 
   } catch (err) {
-    console.error("POST ERROR FULL:", err); // 🔥 MUST SEE THIS
+    console.error("POST ERROR FULL:", err);
     res.status(500).json({ message: err.message });
   }
 });

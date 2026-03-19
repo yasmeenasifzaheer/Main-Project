@@ -33,26 +33,22 @@ export default function ReviewsPage() {
   // ✅ Submit review
  const submitReview = async () => {
   try {
-    const token = localStorage.getItem("token");
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     await axios.post(
       `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
       {
         text: newComment,
-        rating: rating,
-        userName: user?.name
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+    rating,
+    user: currentUser?._id,      // ✅ REQUIRED
+    userName: currentUser?.name  // ✅ display name
       }
     );
 
     setNewComment("");
     setRating(0);
 
-    await fetchComments(); // 🔥 THIS refreshes UI immediately
+    await fetchComments(); // refresh
 
   } catch (error) {
     console.error("Submit Review Error:", error);
