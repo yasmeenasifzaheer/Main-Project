@@ -11,6 +11,7 @@ import {
 } from "../controllers/movieController.js";
 import { protect } from "../middleware/authMiddleware.js";
 import Movie from "../models/Movie.js";
+import Review from "../models/Review.js";
 
 const router = express.Router();
 
@@ -33,13 +34,10 @@ router.delete("/:id", deleteMovie);
 // GET all reviews for a movie
 router.get("/:id/reviews", async (req, res) => {
   try {
-    const movie = await Movie.findById(req.params.id);
+    const reviews = await Review.find({ movie: req.params.id })
+      .sort({ createdAt: -1 });
 
-    if (!movie) {
-      return res.status(404).json({ message: "Movie not found" });
-    }
-
-    res.json({ comments: movie.comments || [] });
+    res.json({ comments: reviews });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
