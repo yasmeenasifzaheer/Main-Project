@@ -92,28 +92,30 @@ router.get("/:id/reviews", async (req, res) => {
 // POST a new review for a movie
 // POST a new review for a movie
 router.post("/:id/comment", async (req, res) => {
-  const { text, rating } = req.body;
-
   try {
     const movie = await Movie.findById(req.params.id);
+
     if (!movie) {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    // 🔥 Save ONLY in Review collection
-    const newReview = new Review({
-      movie: movie._id,
-      text,
-      rating: rating || 0,
-      userName: "Anonymous" // or later from auth
-    });
+    const { text, rating } = req.body;
 
-    await newReview.save();
+    if (!text) {
+      return res.status(400).json({ message: "Text is required" });
+    }
+
+    const newReview = await Review.create({
+      movie: movie._id,
+      userName: "Anonymous",
+      text,
+      rating: rating || 0   // 🔥 safe fallback
+    });
 
     res.status(201).json(newReview);
 
   } catch (err) {
-    console.error("POST COMMENT ERROR:", err);
+    console.error("POST ERROR FULL:", err); // 🔥 MUST SEE THIS
     res.status(500).json({ message: err.message });
   }
 });
