@@ -16,6 +16,7 @@ export default function ReviewsPage() {
       const res = await axios.get(
         `https://main-project-1-20ny.onrender.com/api/movies/${id}/reviews`
       );
+       console.log("API RESPONSE:", res.data); 
       setComments(res.data.comments || []);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -28,29 +29,28 @@ export default function ReviewsPage() {
   }, [id]);
 
   // ✅ Submit review
-  const submitReview = async () => {
-    try {
-      const user = JSON.parse(localStorage.getItem("currentUser"));
+ const submitReview = async () => {
+  try {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
 
-      await axios.post(
-        `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
-        {
-          text: newComment,
-          user: user?.name || "Anonymous" // ✅ match backend
-        }
-      );
+    await axios.post(
+      `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
+      {
+        text: newComment,
+        user: user?.name || "Anonymous"
+      }
+    );
 
-      // ✅ Clear input
-      setNewComment("");
-      setRating(0);
+    setNewComment("");
+    setRating(0);
 
-      // ✅ Refresh comments (FIXED)
-      fetchComments();
+    // 🔥 IMPORTANT FIX
+    await fetchComments();
 
-    } catch (error) {
-      console.error("Submit Review Error:", error);
-    }
-  };
+  } catch (error) {
+    console.error("Submit Review Error:", error);
+  }
+};
 
   // Like review (frontend only for now)
   const likeReview = (index) => {
