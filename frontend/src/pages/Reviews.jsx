@@ -91,27 +91,24 @@ export default function ReviewsPage() {
           <p>No reviews yet</p>
         ) : (
           comments.map((c, i) => (
-            <div key={i} className="review-card">
-              
-              {/* ✅ FIXED field name */}
-              <strong>{c.user || "Anonymous"}</strong>
+  <div key={i} className="review-card">
 
-              {/* ❌ rating removed (not in backend) */}
-              
-              <p className="review-text">{c.text}</p>
+    <strong>{c.user || "Anonymous"}</strong>  {/* ✅ FIX */}
 
-              <div className="review-actions">
-                <button onClick={() => likeReview(i)}>
-                  👍 {c.likes || 0}
-                </button>
+    <p className="review-text">{c.text}</p>  {/* ✅ FIX */}
 
-                <button onClick={() => dislikeReview(i)}>
-                  👎 {c.dislikes || 0}
-                </button>
-              </div>
+    <div className="review-actions">
+      <button onClick={() => likeReview(i)}>
+        👍 {c.likes || 0}
+      </button>
 
-            </div>
-          ))
+      <button onClick={() => dislikeReview(i)}>
+        👎 {c.dislikes || 0}
+      </button>
+    </div>
+
+  </div>
+))
         )}
       </div>
     </div>
