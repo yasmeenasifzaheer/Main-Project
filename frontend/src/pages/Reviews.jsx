@@ -39,7 +39,8 @@ export default function ReviewsPage() {
       `https://main-project-1-20ny.onrender.com/api/movies/${id}/comment`,
       {
         text: newComment,
-        rating: rating
+        rating: rating,
+        userName: user?.name
       },
       {
         headers: {

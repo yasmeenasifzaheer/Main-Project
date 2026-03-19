@@ -99,7 +99,7 @@ router.post("/:id/comment", async (req, res) => {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    const { text, rating } = req.body;
+    const { text, rating, userName } = req.body;
 
     if (!text) {
       return res.status(400).json({ message: "Text is required" });
@@ -109,7 +109,8 @@ router.post("/:id/comment", async (req, res) => {
       movie: movie._id,
       userName: "Anonymous",
       text,
-      rating: rating || 0   // 🔥 safe fallback
+      rating: rating || 0 ,  // 🔥 safe fallback
+      userName: userName || "Anonymous"
     });
 
     res.status(201).json(newReview);
